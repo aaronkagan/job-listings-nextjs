@@ -13,7 +13,10 @@ export default function Home() {
       try {
         const res = await fetch('http://localhost:3000/api/jobs');
         const data = await res.json();
-        if (data) setJobs(data);
+        if (data) {
+          setFilteredListings(data);
+          setJobs(data);
+        }
       } catch (error) {
         console.error('Error:', error);
       } finally {
@@ -49,6 +52,13 @@ function Main({
   function handleAddFilter(filter) {
     if (!activeFilters.includes(filter))
       setActiveFilters([...activeFilters, filter]);
+    // if (activeFilters) {
+    //   setFilteredListings(
+    //     filteredListings.filter((job) => {
+    //       return activeFilters.includes(job.languages.map((elem) => elem));
+    //     })
+    //   );
+    // }
   }
 
   return (
@@ -58,10 +68,17 @@ function Main({
         {activeFilters.map((activeFilter) => {
           return <span>{activeFilter}</span>;
         })}
-        <button onClick={() => setActiveFilters([])}>clear</button>
+        <button
+          onClick={() => {
+            setActiveFilters([]);
+            setFilteredListings(jobs);
+          }}
+        >
+          clear
+        </button>
       </div>
-      {jobs &&
-        jobs.map((job) => {
+      {filteredListings &&
+        filteredListings.map((job) => {
           console.log(job);
           const filters = [job.role, job.level, ...job.tools, ...job.languages];
           return (
