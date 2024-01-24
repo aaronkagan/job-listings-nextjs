@@ -51,20 +51,23 @@ function Main({
 }) {
   function handleAddFilter(filter) {
     const updatedFilters = [...activeFilters, filter];
-    setActiveFilters(updatedFilters);
 
-    setFilteredListings(
-      jobs.filter((listing) =>
-        updatedFilters.every((elem) =>
-          [
-            listing.role,
-            listing.level,
-            ...listing.tools,
-            ...listing.languages
-          ].includes(elem)
+    if (!activeFilters.includes(filter)) {
+      setActiveFilters(updatedFilters);
+
+      setFilteredListings(
+        jobs.filter((listing) =>
+          updatedFilters.every((elem) =>
+            [
+              listing.role,
+              listing.level,
+              ...listing.tools,
+              ...listing.languages
+            ].includes(elem)
+          )
         )
-      )
-    );
+      );
+    }
   }
 
   function handleRemoveFilter(filter) {
