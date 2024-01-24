@@ -94,7 +94,10 @@ function Main({
         <div>
           {activeFilters.map((activeFilter) => {
             return (
-              <button onClick={() => handleRemoveFilter(activeFilter)}>
+              <button
+                key={activeFilter}
+                onClick={() => handleRemoveFilter(activeFilter)}
+              >
                 {activeFilter + ' X'}
               </button>
             );
@@ -114,7 +117,7 @@ function Main({
         filteredListings.map((job) => {
           const filters = [job.role, job.level, ...job.tools, ...job.languages];
           return (
-            <article>
+            <article key={job}>
               <Image
                 width={48}
                 height={48}
