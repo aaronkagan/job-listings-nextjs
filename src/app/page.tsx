@@ -52,11 +52,19 @@ function Main({
   function handleAddFilter(filter) {
     if (!activeFilters.includes(filter))
       setActiveFilters([...activeFilters, filter]);
-    // if (activeFilters) {
-    //   setFilteredListings(
-    //     filteredListings.some((r) => activeFilters.includes(r))
-    //   );
-    // }
+    if (activeFilters) {
+      setFilteredListings(
+        filteredListings.filter((listing) =>
+          // listing.languages.some((r) => activeFilters.includes(r))
+          [
+            listing.role,
+            listing.level,
+            ...listing.tools,
+            ...listing.languages
+          ].some((elem) => [...activeFilters, filter].includes(elem))
+        )
+      );
+    }
   }
 
   return (
