@@ -50,22 +50,40 @@ function Main({
   setFilteredListings
 }) {
   function handleAddFilter(filter) {
-    if (!activeFilters.includes(filter))
-      setActiveFilters([...activeFilters, filter]);
-    if (activeFilters) {
-      setFilteredListings(
-        filteredListings.filter((listing) =>
-          [...activeFilters, filter].every((elem) =>
-            [
-              listing.role,
-              listing.level,
-              ...listing.tools,
-              ...listing.languages
-            ].includes(elem)
-          )
+    const updatedFilters = [...activeFilters, filter];
+    setActiveFilters(updatedFilters);
+
+    setFilteredListings(
+      jobs.filter((listing) =>
+        updatedFilters.every((elem) =>
+          [
+            listing.role,
+            listing.level,
+            ...listing.tools,
+            ...listing.languages
+          ].includes(elem)
         )
-      );
-    }
+      )
+    );
+  }
+
+  function handleRemoveFilter(filter) {
+    const updatedFilters = activeFilters.filter((elem) => elem !== filter);
+
+    setActiveFilters(updatedFilters);
+
+    setFilteredListings(
+      jobs.filter((listing) =>
+        updatedFilters.every((elem) =>
+          [
+            listing.role,
+            listing.level,
+            ...listing.tools,
+            ...listing.languages
+          ].includes(elem)
+        )
+      )
+    );
   }
 
   return (
@@ -75,7 +93,11 @@ function Main({
       {activeFilters.length ? (
         <div>
           {activeFilters.map((activeFilter) => {
-            return <span>{activeFilter}</span>;
+            return (
+              <button onClick={() => handleRemoveFilter(activeFilter)}>
+                {activeFilter + ' X'}
+              </button>
+            );
           })}
           <button
             onClick={() => {
@@ -90,7 +112,6 @@ function Main({
 
       {filteredListings &&
         filteredListings.map((job) => {
-          console.log(job);
           const filters = [job.role, job.level, ...job.tools, ...job.languages];
           return (
             <article>
@@ -116,7 +137,10 @@ function Main({
               <div>
                 {filters.map((filter) => {
                   return (
-                    <button onClick={() => handleAddFilter(filter)}>
+                    <button
+                      key={filter}
+                      onClick={() => handleAddFilter(filter)}
+                    >
                       {filter}
                     </button>
                   );
