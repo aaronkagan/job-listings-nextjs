@@ -55,12 +55,14 @@ function Main({
     if (activeFilters) {
       setFilteredListings(
         filteredListings.filter((listing) =>
-          [
-            listing.role,
-            listing.level,
-            ...listing.tools,
-            ...listing.languages
-          ].some((elem) => [...activeFilters, filter].includes(elem))
+          [...activeFilters, filter].every((elem) =>
+            [
+              listing.role,
+              listing.level,
+              ...listing.tools,
+              ...listing.languages
+            ].includes(elem)
+          )
         )
       );
     }
