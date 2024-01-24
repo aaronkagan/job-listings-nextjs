@@ -22,12 +22,16 @@ export default function Home() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
-  return (
-    <>
-      <main>Hello World</main>
-    </>
-  );
+  return <Main />;
+}
+
+function Main() {
+  return <main>Hello World</main>;
+}
+
+function Loading() {
+  return <div>Loading...</div>;
 }
