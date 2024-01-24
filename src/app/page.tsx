@@ -44,7 +44,7 @@ function Main({ jobs, activeFilters, setActiveFilters }) {
         {activeFilters.map((activeFilter) => {
           return <span>{activeFilter}</span>;
         })}
-        <span>clear</span>
+        <span onClick={() => setActiveFilters([])}>clear</span>
       </div>
       {jobs &&
         jobs.map((job) => {
@@ -56,6 +56,7 @@ function Main({ jobs, activeFilters, setActiveFilters }) {
                 width={48}
                 height={48}
                 src={job.logo}
+                alt={job.company + ' logo'}
               />
               <div>
                 <span>{job.company}</span>
