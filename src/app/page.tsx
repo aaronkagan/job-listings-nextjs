@@ -55,7 +55,6 @@ function Main({
     if (activeFilters) {
       setFilteredListings(
         filteredListings.filter((listing) =>
-          // listing.languages.some((r) => activeFilters.includes(r))
           [
             listing.role,
             listing.level,
