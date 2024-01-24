@@ -6,6 +6,7 @@ export default function Home() {
   const [jobs, setJobs] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
+  const [filteredListings, setFilteredListings] = useState<any>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -32,11 +33,19 @@ export default function Home() {
       jobs={jobs}
       activeFilters={activeFilters}
       setActiveFilters={setActiveFilters}
+      filteredListings={filteredListings}
+      setFilteredListings={setFilteredListings}
     />
   );
 }
 
-function Main({ jobs, activeFilters, setActiveFilters }) {
+function Main({
+  jobs,
+  activeFilters,
+  setActiveFilters,
+  filteredListings,
+  setFilteredListings
+}) {
   function handleAddFilter(filter) {
     if (!activeFilters.includes(filter))
       setActiveFilters([...activeFilters, filter]);
