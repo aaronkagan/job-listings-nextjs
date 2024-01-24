@@ -54,9 +54,7 @@ function Main({
       setActiveFilters([...activeFilters, filter]);
     // if (activeFilters) {
     //   setFilteredListings(
-    //     filteredListings.filter((job) => {
-    //       return activeFilters.includes(job.languages.map((elem) => elem));
-    //     })
+    //     filteredListings.some((r) => activeFilters.includes(r))
     //   );
     // }
   }
@@ -64,19 +62,23 @@ function Main({
   return (
     <main>
       <header>Header</header>
-      <div>
-        {activeFilters.map((activeFilter) => {
-          return <span>{activeFilter}</span>;
-        })}
-        <button
-          onClick={() => {
-            setActiveFilters([]);
-            setFilteredListings(jobs);
-          }}
-        >
-          clear
-        </button>
-      </div>
+
+      {activeFilters.length ? (
+        <div>
+          {activeFilters.map((activeFilter) => {
+            return <span>{activeFilter}</span>;
+          })}
+          <button
+            onClick={() => {
+              setActiveFilters([]);
+              setFilteredListings(jobs);
+            }}
+          >
+            clear
+          </button>
+        </div>
+      ) : null}
+
       {filteredListings &&
         filteredListings.map((job) => {
           console.log(job);
