@@ -1,3 +1,33 @@
+'use client';
+import { useEffect, useState } from 'react';
+
 export default function Home() {
-  return <main></main>;
+  const [jobs, setJobs] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch('http://localhost:3000/api/jobs');
+        const data = await res.json();
+        if (data) setJobs(data);
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <>
+      <main>Hello World</main>
+    </>
+  );
 }
