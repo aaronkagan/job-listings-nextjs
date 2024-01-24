@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch('http://localhost:3000/api/jobs');
+        const res = await fetch('http://localhost:80/api/jobs');
         const data = await res.json();
         if (data) {
           setFilteredListings(data);
