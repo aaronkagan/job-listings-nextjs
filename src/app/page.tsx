@@ -37,6 +37,11 @@ export default function Home() {
 }
 
 function Main({ jobs, activeFilters, setActiveFilters }) {
+  function handleAddFilter(filter) {
+    if (!activeFilters.includes(filter))
+      setActiveFilters([...activeFilters, filter]);
+  }
+
   return (
     <main>
       <header>Header</header>
@@ -44,7 +49,7 @@ function Main({ jobs, activeFilters, setActiveFilters }) {
         {activeFilters.map((activeFilter) => {
           return <span>{activeFilter}</span>;
         })}
-        <span onClick={() => setActiveFilters([])}>clear</span>
+        <button onClick={() => setActiveFilters([])}>clear</button>
       </div>
       {jobs &&
         jobs.map((job) => {
@@ -73,7 +78,11 @@ function Main({ jobs, activeFilters, setActiveFilters }) {
               <div className="w-[279px] max-w-[90%] h-[1px] bg-[#B7C4C4]"></div>
               <div>
                 {filters.map((filter) => {
-                  return <span>{filter}</span>;
+                  return (
+                    <button onClick={() => handleAddFilter(filter)}>
+                      {filter}
+                    </button>
+                  );
                 })}
               </div>
             </article>
