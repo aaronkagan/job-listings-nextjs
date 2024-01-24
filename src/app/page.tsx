@@ -120,7 +120,7 @@ function Main({
         filteredListings.map((job) => {
           const filters = [job.role, job.level, ...job.tools, ...job.languages];
           return (
-            <article key={job}>
+            <article key={JSON.stringify(job)}>
               <Image
                 width={48}
                 height={48}
