@@ -90,72 +90,95 @@ function Main({
   }
 
   return (
-    <main>
-      <header>Header</header>
+    <div>
+      <header className="sm:bg-[url('/images/bg-header-desktop.svg')] bg-[url('/images/bg-header-mobile.svg')] bg-cover h-[150px] bg-no-repeat"></header>
 
-      {activeFilters.length ? (
-        <div>
-          {activeFilters.map((activeFilter) => {
+      <main className="flex flex-col items-center bg-[#EFFAFA] ">
+        {activeFilters.length ? (
+          <div className="bg-[#fff] p-[20px] rounded-[5px] flex gap-[40px] min-h-[120px] w-[90%] max-w-[320px] translate-y-[-20%]">
+            <div className="flex flex-wrap w-[66%] gap-[16px]">
+              {activeFilters.map((activeFilter) => {
+                return (
+                  <button
+                    key={activeFilter}
+                    className="flex items-center"
+                  >
+                    <span className="text-[#5ba4a4] px-[8px] py-[5px] bg-[#5CA5A5] bg-opacity-[0.1]">
+                      {activeFilter}
+                    </span>
+                    <span className="p-[10px] bg-[#5CA5A5]">
+                      <Image
+                        src={'/images/icon-remove.svg'}
+                        width={13}
+                        height={13}
+                        alt="remove"
+                        onClick={() => handleRemoveFilter(activeFilter)}
+                        className=""
+                      />
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <button
+              onClick={() => {
+                setActiveFilters([]);
+                setFilteredListings(jobs);
+              }}
+              className="text-[#7C8F8F]"
+            >
+              clear
+            </button>
+          </div>
+        ) : null}
+
+        {filteredListings &&
+          filteredListings.map((job) => {
+            const filters = [
+              job.role,
+              job.level,
+              ...job.tools,
+              ...job.languages
+            ];
             return (
-              <button
-                key={activeFilter}
-                onClick={() => handleRemoveFilter(activeFilter)}
-              >
-                {activeFilter + ' X'}
-              </button>
+              <article key={JSON.stringify(job)}>
+                <Image
+                  width={48}
+                  height={48}
+                  src={job.logo}
+                  alt={job.company + ' logo'}
+                />
+                <div>
+                  <span>{job.company}</span>
+                  {job.new && <span>new!</span>}
+                  {job.featured && <span>featured!</span>}
+                </div>
+
+                <h2>{job.position}</h2>
+                <div>
+                  <span>{job.postedAt}</span>
+                  <span>{job.contract}</span>
+                  <span>{job.location}</span>
+                </div>
+                <div className="w-[279px] max-w-[90%] h-[1px] bg-[#B7C4C4]"></div>
+                <div>
+                  {filters.map((filter) => {
+                    return (
+                      <button
+                        key={filter}
+                        onClick={() => handleAddFilter(filter)}
+                      >
+                        {filter}
+                      </button>
+                    );
+                  })}
+                </div>
+              </article>
             );
           })}
-          <button
-            onClick={() => {
-              setActiveFilters([]);
-              setFilteredListings(jobs);
-            }}
-          >
-            clear
-          </button>
-        </div>
-      ) : null}
-
-      {filteredListings &&
-        filteredListings.map((job) => {
-          const filters = [job.role, job.level, ...job.tools, ...job.languages];
-          return (
-            <article key={JSON.stringify(job)}>
-              <Image
-                width={48}
-                height={48}
-                src={job.logo}
-                alt={job.company + ' logo'}
-              />
-              <div>
-                <span>{job.company}</span>
-                {job.new && <span>new!</span>}
-                {job.featured && <span>featured!</span>}
-              </div>
-
-              <h2>{job.position}</h2>
-              <div>
-                <span>{job.postedAt}</span>
-                <span>{job.contract}</span>
-                <span>{job.location}</span>
-              </div>
-              <div className="w-[279px] max-w-[90%] h-[1px] bg-[#B7C4C4]"></div>
-              <div>
-                {filters.map((filter) => {
-                  return (
-                    <button
-                      key={filter}
-                      onClick={() => handleAddFilter(filter)}
-                    >
-                      {filter}
-                    </button>
-                  );
-                })}
-              </div>
-            </article>
-          );
-        })}
-    </main>
+      </main>
+    </div>
   );
 }
 
