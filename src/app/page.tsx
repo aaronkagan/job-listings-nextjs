@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function Home() {
   const [jobs, setJobs] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [filteredListings, setFilteredListings] = useState<any>(null);
 
@@ -20,16 +20,15 @@ export default function Home() {
       } catch (error) {
         console.error('Error:', error);
       } finally {
-        setLoading(false);
       }
     }
 
     fetchData();
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   return (
     <Main
@@ -90,20 +89,20 @@ function Main({
   }
 
   return (
-    <div>
+    <div className="bg-[#4d8788] text-[16px]">
       <header className="sm:bg-[url('/images/bg-header-desktop.svg')] bg-[url('/images/bg-header-mobile.svg')] bg-cover h-[150px] bg-no-repeat"></header>
 
-      <main className="flex flex-col items-center bg-[#EFFAFA] ">
+      <main className="flex flex-col items-center bg-[#EFFAFA] min-h-[100vh] ">
         {activeFilters.length ? (
-          <div className="bg-[#fff] p-[20px] rounded-[5px] flex gap-[40px] min-h-[120px] w-[90%] max-w-[320px] translate-y-[-20%]">
-            <div className="flex flex-wrap w-[66%] gap-[16px]">
+          <div className="bg-[#fff] p-[20px] rounded-[5px] flex gap-[40px] min-h-[120px] w-[90%] max-w-[320px] translate-y-[-20%] mb-[16px]">
+            <div className="flex flex-wrap w-[66%] gap-[16px] ">
               {activeFilters.map((activeFilter) => {
                 return (
                   <button
                     key={activeFilter}
                     className="flex items-center"
                   >
-                    <span className="text-[#5ba4a4] px-[8px] py-[5px] bg-[#5CA5A5] bg-opacity-[0.1] rounded-s-[5px] ">
+                    <span className="text-[#5ba4a4] px-[8px] py-[5px] bg-[#5CA5A5]rounded-s-[5px] bg-opacity-[0.1]">
                       {activeFilter}
                     </span>
                     <span className="p-[10px] bg-[#5CA5A5] rounded-e-[5px]">
@@ -142,7 +141,10 @@ function Main({
               ...job.languages
             ];
             return (
-              <article key={JSON.stringify(job)}>
+              <article
+                key={JSON.stringify(job)}
+                className="mt-[16px]"
+              >
                 <Image
                   width={48}
                   height={48}
@@ -182,6 +184,6 @@ function Main({
   );
 }
 
-function Loading() {
-  return <div>Loading...</div>;
-}
+// function Loading() {
+//   return <div>Loading...</div>;
+// }
