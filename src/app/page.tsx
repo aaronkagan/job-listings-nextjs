@@ -103,10 +103,10 @@ function Main({
                     key={activeFilter}
                     className="flex items-center"
                   >
-                    <span className="text-[#5ba4a4] px-[8px] py-[5px] bg-[#5CA5A5] bg-opacity-[0.1]">
+                    <span className="text-[#5ba4a4] px-[8px] py-[5px] bg-[#5CA5A5] bg-opacity-[0.1] rounded-s-[5px] ">
                       {activeFilter}
                     </span>
-                    <span className="p-[10px] bg-[#5CA5A5]">
+                    <span className="p-[10px] bg-[#5CA5A5] rounded-e-[5px]">
                       <Image
                         src={'/images/icon-remove.svg'}
                         width={13}
