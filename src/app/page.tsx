@@ -102,16 +102,18 @@ function Main({
                     key={activeFilter}
                     className="flex items-center"
                   >
-                    <span className="text-[#5ba4a4] px-[8px] py-[5px] bg-[#5CA5A5]rounded-s-[5px] bg-opacity-[0.1]">
+                    <span className="text-[#5ba4a4] px-[8px] pt-[5px] pb-[3px] bg-[#5CA5A5] rounded-s-[5px] bg-opacity-[0.1]">
                       {activeFilter}
                     </span>
-                    <span className="p-[10px] bg-[#5CA5A5] rounded-e-[5px]">
+                    <span
+                      onClick={() => handleRemoveFilter(activeFilter)}
+                      className="p-[10px] bg-[#5CA5A5] hover:bg-[#000] rounded-e-[5px]"
+                    >
                       <Image
                         src={'/images/icon-remove.svg'}
                         width={13}
                         height={13}
                         alt="remove"
-                        onClick={() => handleRemoveFilter(activeFilter)}
                         className=""
                       />
                     </span>
@@ -143,33 +145,79 @@ function Main({
             return (
               <article
                 key={JSON.stringify(job)}
-                className="mt-[16px]"
+                className="mt-[16px] mb-[24px] rounded-[5px] bg-[#fff] p-[24px] pt-[0px] first:mt-[56px] w-[90%] max-w-[320px]"
               >
                 <Image
                   width={48}
                   height={48}
                   src={job.logo}
                   alt={job.company + ' logo'}
+                  className="translate-y-[-50%]"
                 />
-                <div>
-                  <span>{job.company}</span>
-                  {job.new && <span>new!</span>}
-                  {job.featured && <span>featured!</span>}
+                <div className="mt-[-10px] flex items-center gap-[40px]">
+                  <span className="text-[#5CA5A5] text-[13px]">
+                    {job.company}
+                  </span>
+                  <div className="flex items-center gap-[8px]">
+                    {job.new && (
+                      <span className="bg-[#5CA5A5] text-[#fff] uppercase px-[8px] pt-[3px] rounded-[999px]">
+                        new!
+                      </span>
+                    )}
+                    {job.featured && (
+                      <span className="bg-[#000] text-[#fff] uppercase px-[8px] pt-[3px] rounded-[999px]">
+                        featured
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <h2>{job.position}</h2>
-                <div>
+                <h2 className="hover:text-[#5CA5A5] hover:cursor-pointer my-[9px] text-[15px]">
+                  {job.position}
+                </h2>
+                <div className="mb-[15px] font-[500] text-[#7C8F8F] flex gap-[10px] items-center">
                   <span>{job.postedAt}</span>
+                  <svg
+                    width="4"
+                    height="4"
+                    viewBox="0 0 4 4"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="2"
+                      cy="2"
+                      r="2"
+                      fill="#B7C4C4"
+                    />
+                  </svg>
+
                   <span>{job.contract}</span>
+                  <svg
+                    width="4"
+                    height="4"
+                    viewBox="0 0 4 4"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="2"
+                      cy="2"
+                      r="2"
+                      fill="#B7C4C4"
+                    />
+                  </svg>
+
                   <span>{job.location}</span>
                 </div>
                 <div className="w-[279px] max-w-[90%] h-[1px] bg-[#B7C4C4]"></div>
-                <div>
+                <div className="flex flex-wrap gap-[16px] mt-[16px]">
                   {filters.map((filter) => {
                     return (
                       <button
                         key={filter}
                         onClick={() => handleAddFilter(filter)}
+                        className="text-[#5ba4a4] px-[8px] pt-[5px] pb-[3px] bg-[#5CA5A5] rounded-[5px] bg-opacity-[0.1] hover:bg-[#5CA5A5] hover:text-[#fff]"
                       >
                         {filter}
                       </button>
