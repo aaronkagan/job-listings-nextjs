@@ -19,7 +19,7 @@ interface Job {
 }
 export default function Home() {
   const [jobs, setJobs] = useState<Job[] | null>(null);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [filteredListings, setFilteredListings] = useState<Job[] | null>(null);
 
@@ -35,6 +35,7 @@ export default function Home() {
         if (data) {
           setFilteredListings(data);
           setJobs(data);
+          setLoading(false);
         }
       } catch (error) {
         console.error('Error:', error);
@@ -56,6 +57,7 @@ export default function Home() {
       setActiveFilters={setActiveFilters}
       filteredListings={filteredListings}
       setFilteredListings={setFilteredListings}
+      loading={loading}
     />
   );
 }
@@ -66,6 +68,7 @@ interface MainProps {
   setActiveFilters: React.Dispatch<React.SetStateAction<string[]>>;
   filteredListings: Job[] | null;
   setFilteredListings: React.Dispatch<React.SetStateAction<Job[] | null>>;
+  loading: boolean;
 }
 
 function Main({
@@ -73,7 +76,8 @@ function Main({
   activeFilters,
   setActiveFilters,
   filteredListings,
-  setFilteredListings
+  setFilteredListings,
+  loading
 }: MainProps) {
   function handleAddFilter(filter: string) {
     const updatedFilters = [...activeFilters, filter];
@@ -164,6 +168,8 @@ function Main({
             </button>
           </div>
         ) : null}
+
+        {loading && <h1>Loading....</h1>}
 
         {filteredListings &&
           filteredListings.map((job) => {
