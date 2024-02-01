@@ -2,16 +2,35 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
+interface Job {
+  company: string;
+  role: string;
+  level: string;
+  tools: string[];
+  languages: string[];
+  featured: boolean;
+  logo: string;
+  contract: string;
+  id: number;
+  location: string;
+  new: boolean;
+  position: string;
+  postedAt: string;
+}
 export default function Home() {
-  const [jobs, setJobs] = useState<any>(null);
+  const [jobs, setJobs] = useState<Job[] | null>(null);
   // const [loading, setLoading] = useState(true);
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
-  const [filteredListings, setFilteredListings] = useState<any>(null);
+  const [filteredListings, setFilteredListings] = useState<Job[] | null>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await fetch('http://localhost:3000/api/jobs');
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch');
+        }
         const data = await res.json();
         if (data) {
           setFilteredListings(data);
@@ -41,20 +60,52 @@ export default function Home() {
   );
 }
 
+interface MainProps {
+  jobs: Job[] | null;
+  activeFilters: string[];
+  setActiveFilters: React.Dispatch<React.SetStateAction<string[]>>;
+  filteredListings: Job[] | null;
+  setFilteredListings: React.Dispatch<React.SetStateAction<Job[] | null>>;
+}
+
 function Main({
   jobs,
   activeFilters,
   setActiveFilters,
   filteredListings,
   setFilteredListings
-}) {
-  function handleAddFilter(filter) {
+}: MainProps) {
+  function handleAddFilter(filter: string) {
     const updatedFilters = [...activeFilters, filter];
 
     if (!activeFilters.includes(filter)) {
       setActiveFilters(updatedFilters);
 
       setFilteredListings(
+        jobs &&
+          jobs.filter((listing) =>
+            updatedFilters.every((elem) =>
+              [
+                listing.role,
+                listing.level,
+                ...listing.tools,
+                ...listing.languages
+              ].includes(elem)
+            )
+          )
+      );
+    }
+  }
+
+  function handleRemoveFilter(filter: string) {
+    const updatedFilters = activeFilters.filter(
+      (elem: string) => elem !== filter
+    );
+
+    setActiveFilters(updatedFilters);
+
+    setFilteredListings(
+      jobs &&
         jobs.filter((listing) =>
           updatedFilters.every((elem) =>
             [
@@ -65,26 +116,6 @@ function Main({
             ].includes(elem)
           )
         )
-      );
-    }
-  }
-
-  function handleRemoveFilter(filter) {
-    const updatedFilters = activeFilters.filter((elem) => elem !== filter);
-
-    setActiveFilters(updatedFilters);
-
-    setFilteredListings(
-      jobs.filter((listing) =>
-        updatedFilters.every((elem) =>
-          [
-            listing.role,
-            listing.level,
-            ...listing.tools,
-            ...listing.languages
-          ].includes(elem)
-        )
-      )
     );
   }
 
@@ -96,7 +127,7 @@ function Main({
         {activeFilters.length ? (
           <div className="bg-[#fff] p-[20px] rounded-[5px] flex justify-between gap-[40px] min-h-[120px] w-[90%] max-w-[320px] translate-y-[-20%] mb-[16px] lg:max-w-[1110px] lg:justify-between lg:px-[40px] lg:py-[25px]">
             <div className="flex flex-wrap w-[66%] gap-[16px] ">
-              {activeFilters.map((activeFilter) => {
+              {activeFilters.map((activeFilter: string) => {
                 return (
                   <button
                     key={activeFilter}
