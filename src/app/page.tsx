@@ -94,7 +94,7 @@ function Main({
 
       <main className="flex flex-col items-center bg-[#EFFAFA] min-h-[100vh] ">
         {activeFilters.length ? (
-          <div className="bg-[#fff] p-[20px] rounded-[5px] flex gap-[40px] min-h-[120px] w-[90%] max-w-[320px] translate-y-[-20%] mb-[16px] lg:max-w-[1110px] lg:justify-between lg:px-[40px] lg:py-[25px]">
+          <div className="bg-[#fff] p-[20px] rounded-[5px] flex justify-between gap-[40px] min-h-[120px] w-[90%] max-w-[320px] translate-y-[-20%] mb-[16px] lg:max-w-[1110px] lg:justify-between lg:px-[40px] lg:py-[25px]">
             <div className="flex flex-wrap w-[66%] gap-[16px] ">
               {activeFilters.map((activeFilter) => {
                 return (
@@ -145,72 +145,79 @@ function Main({
             return (
               <article
                 key={JSON.stringify(job)}
-                className="mt-[16px] mb-[24px] rounded-[5px] bg-[#fff] p-[24px] pt-[0px] first:mt-[56px] w-[90%] max-w-[320px] lg:max-w-[1110px] "
+                className="mt-[16px] mb-[24px] rounded-[5px] bg-[#fff] p-[24px] pt-[0px] first:mt-[56px] w-[90%] max-w-[320px] lg:max-w-[1110px] lg:flex lg:justify-between lg:items-center lg:pt-[24px]"
               >
-                <Image
-                  width={48}
-                  height={48}
-                  src={job.logo}
-                  alt={job.company + ' logo'}
-                  className="translate-y-[-50%] lg:w-[88px]"
-                />
-                <div className="mt-[-10px] flex items-center gap-[40px]">
-                  <span className="text-[#5CA5A5] text-[13px] lg:text-[18px]">
-                    {job.company}
-                  </span>
-                  <div className="flex items-center gap-[8px] text-[14px]">
-                    {job.new && (
-                      <span className="bg-[#5CA5A5] text-[#fff] uppercase px-[8px] pt-[3px] rounded-[999px]">
-                        new!
+                <div className="lg:flex items-center gap-[24px]">
+                  <Image
+                    width={48}
+                    height={48}
+                    src={job.logo}
+                    alt={job.company + ' logo'}
+                    className="translate-y-[-50%] lg:w-[88px] lg:translate-y-0"
+                  />
+
+                  <div>
+                    <div className="mt-[-10px] flex items-center gap-[40px] lg:mt-0">
+                      <span className="text-[#5CA5A5] text-[13px] lg:text-[18px]">
+                        {job.company}
                       </span>
-                    )}
-                    {job.featured && (
-                      <span className="bg-[#000] text-[#fff] uppercase px-[8px] pt-[3px] rounded-[999px]">
-                        featured
-                      </span>
-                    )}
+                      <div className="flex items-center gap-[8px] text-[14px]">
+                        {job.new && (
+                          <span className="bg-[#5CA5A5] text-[#fff] uppercase px-[8px] pt-[3px] rounded-[999px]">
+                            new!
+                          </span>
+                        )}
+                        {job.featured && (
+                          <span className="bg-[#000] text-[#fff] uppercase px-[8px] pt-[3px] rounded-[999px]">
+                            featured
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    <h2 className="hover:text-[#5CA5A5] hover:cursor-pointer my-[9px] text-[15px] lg:text-[22px]">
+                      {job.position}
+                    </h2>
+                    <div className="mb-[15px] font-[500] text-[#7C8F8F] flex gap-[10px] items-center text-[16px] lg:text-[18px]">
+                      <span>{job.postedAt}</span>
+                      <svg
+                        width="4"
+                        height="4"
+                        viewBox="0 0 4 4"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <circle
+                          cx="2"
+                          cy="2"
+                          r="2"
+                          fill="#B7C4C4"
+                        />
+                      </svg>
+
+                      <span>{job.contract}</span>
+                      <svg
+                        width="4"
+                        height="4"
+                        viewBox="0 0 4 4"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <circle
+                          cx="2"
+                          cy="2"
+                          r="2"
+                          fill="#B7C4C4"
+                        />
+                      </svg>
+
+                      <span>{job.location}</span>
+                    </div>
                   </div>
                 </div>
 
-                <h2 className="hover:text-[#5CA5A5] hover:cursor-pointer my-[9px] text-[15px] lg:text-[22px]">
-                  {job.position}
-                </h2>
-                <div className="mb-[15px] font-[500] text-[#7C8F8F] flex gap-[10px] items-center text-[16px] lg:text-[18px]">
-                  <span>{job.postedAt}</span>
-                  <svg
-                    width="4"
-                    height="4"
-                    viewBox="0 0 4 4"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="2"
-                      cy="2"
-                      r="2"
-                      fill="#B7C4C4"
-                    />
-                  </svg>
+                <div className="w-[279px] w-[100%] h-[1px] bg-[#B7C4C4] lg:hidden"></div>
 
-                  <span>{job.contract}</span>
-                  <svg
-                    width="4"
-                    height="4"
-                    viewBox="0 0 4 4"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="2"
-                      cy="2"
-                      r="2"
-                      fill="#B7C4C4"
-                    />
-                  </svg>
-
-                  <span>{job.location}</span>
-                </div>
-                <div className="w-[279px] max-w-[90%] h-[1px] bg-[#B7C4C4] lg:hidden"></div>
                 <div className="flex flex-wrap gap-[16px] mt-[16px]">
                   {filters.map((filter) => {
                     return (
