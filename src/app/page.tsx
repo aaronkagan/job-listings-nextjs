@@ -13,7 +13,7 @@ interface Job {
   contract: string;
   id: number;
   location: string;
-  new: boolean;
+  // new: boolean;
   position: string;
   postedAt: string;
 }
