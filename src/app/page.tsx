@@ -90,7 +90,7 @@ function Main({
 
   return (
     <div className="bg-[#4d8788] text-[16px]">
-      <header className="sm:bg-[url('/images/bg-header-desktop.svg')] bg-[url('/images/bg-header-mobile.svg')] bg-cover h-[150px] bg-no-repeat"></header>
+      <header className="lg:bg-[url('/images/bg-header-desktop.svg')] bg-[url('/images/bg-header-mobile.svg')] bg-cover h-[150px] bg-no-repeat"></header>
 
       <main className="flex flex-col items-center bg-[#EFFAFA] min-h-[100vh] ">
         {activeFilters.length ? (
@@ -145,20 +145,20 @@ function Main({
             return (
               <article
                 key={JSON.stringify(job)}
-                className="mt-[16px] mb-[24px] rounded-[5px] bg-[#fff] p-[24px] pt-[0px] first:mt-[56px] w-[90%] max-w-[320px]"
+                className="mt-[16px] mb-[24px] rounded-[5px] bg-[#fff] p-[24px] pt-[0px] first:mt-[56px] w-[90%] max-w-[320px] lg:max-w-[1110px] "
               >
                 <Image
                   width={48}
                   height={48}
                   src={job.logo}
                   alt={job.company + ' logo'}
-                  className="translate-y-[-50%]"
+                  className="translate-y-[-50%] lg:w-[88px]"
                 />
                 <div className="mt-[-10px] flex items-center gap-[40px]">
-                  <span className="text-[#5CA5A5] text-[13px]">
+                  <span className="text-[#5CA5A5] text-[13px] lg:text-[18px]">
                     {job.company}
                   </span>
-                  <div className="flex items-center gap-[8px]">
+                  <div className="flex items-center gap-[8px] text-[14px]">
                     {job.new && (
                       <span className="bg-[#5CA5A5] text-[#fff] uppercase px-[8px] pt-[3px] rounded-[999px]">
                         new!
@@ -172,10 +172,10 @@ function Main({
                   </div>
                 </div>
 
-                <h2 className="hover:text-[#5CA5A5] hover:cursor-pointer my-[9px] text-[15px]">
+                <h2 className="hover:text-[#5CA5A5] hover:cursor-pointer my-[9px] text-[15px] lg:text-[22px]">
                   {job.position}
                 </h2>
-                <div className="mb-[15px] font-[500] text-[#7C8F8F] flex gap-[10px] items-center">
+                <div className="mb-[15px] font-[500] text-[#7C8F8F] flex gap-[10px] items-center text-[16px] lg:text-[18px]">
                   <span>{job.postedAt}</span>
                   <svg
                     width="4"
@@ -210,14 +210,14 @@ function Main({
 
                   <span>{job.location}</span>
                 </div>
-                <div className="w-[279px] max-w-[90%] h-[1px] bg-[#B7C4C4]"></div>
+                <div className="w-[279px] max-w-[90%] h-[1px] bg-[#B7C4C4] lg:hidden"></div>
                 <div className="flex flex-wrap gap-[16px] mt-[16px]">
                   {filters.map((filter) => {
                     return (
                       <button
                         key={filter}
                         onClick={() => handleAddFilter(filter)}
-                        className="text-[#5ba4a4] px-[8px] pt-[5px] pb-[3px] bg-[#5CA5A5] rounded-[5px] bg-opacity-[0.1] hover:bg-[#5CA5A5] hover:text-[#fff]"
+                        className="text-[#5ba4a4] px-[8px] pt-[5px] pb-[3px] bg-[#5CA5A5] rounded-[5px] bg-opacity-[0.1] hover:bg-[#5CA5A5] hover:text-[#fff]  "
                       >
                         {filter}
                       </button>
