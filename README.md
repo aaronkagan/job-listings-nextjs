@@ -36,10 +36,11 @@ Users should be able to:
 ### Built with
 
 - Semantic HTML
-- Tailwind
-- Mobile-first workflow
+- TailwindCSS
+- TypeScript
 - Next.js
 - Supabase
+- Mobile-first workflow
 
 **Note: These are just examples. Delete this note and replace the list above with your own choices**
 
