@@ -1,4 +1,4 @@
-# Full-stack Job listings with filtering
+# Full-stack (Next.js and Supabase) bob listings with filtering
 
 ## Table of contents
 
