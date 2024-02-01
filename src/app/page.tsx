@@ -145,7 +145,9 @@ function Main({
             return (
               <article
                 key={JSON.stringify(job)}
-                className="mt-[16px] mb-[24px] rounded-[5px] bg-[#fff] p-[24px] pt-[0px] first:mt-[56px] w-[90%] max-w-[320px] lg:max-w-[1110px] lg:flex lg:justify-between lg:items-center lg:pt-[24px]"
+                className={`mt-[16px] mb-[24px] rounded-[5px] bg-[#fff] p-[24px] pt-[0px] first:mt-[56px] w-[90%] max-w-[320px] lg:max-w-[1110px] lg:flex lg:justify-between lg:items-center lg:pt-[24px] ${
+                  job.featured ? 'featured' : ''
+                } `}
               >
                 <div className="lg:flex items-center gap-[24px]">
                   <Image
