@@ -94,7 +94,7 @@ function Main({
 
       <main className="flex flex-col items-center bg-[#EFFAFA] min-h-[100vh] ">
         {activeFilters.length ? (
-          <div className="bg-[#fff] p-[20px] rounded-[5px] flex gap-[40px] min-h-[120px] w-[90%] max-w-[320px] translate-y-[-20%] mb-[16px]">
+          <div className="bg-[#fff] p-[20px] rounded-[5px] flex gap-[40px] min-h-[120px] w-[90%] max-w-[320px] translate-y-[-20%] mb-[16px] lg:max-w-[1110px] lg:justify-between lg:px-[40px] lg:py-[25px]">
             <div className="flex flex-wrap w-[66%] gap-[16px] ">
               {activeFilters.map((activeFilter) => {
                 return (
