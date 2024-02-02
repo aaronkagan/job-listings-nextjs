@@ -26,7 +26,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch('http://localhost:3000/api/jobs');
+        const res = await fetch('/api/jobs');
 
         if (!res.ok) {
           throw new Error('Failed to fetch');
