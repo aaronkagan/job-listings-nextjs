@@ -26,7 +26,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch('/api/jobs');
+        const res = await fetch('/api/jobs', { cache: 'no-store' });
 
         if (!res.ok) {
           throw new Error('Failed to fetch');
